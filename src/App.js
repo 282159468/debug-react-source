@@ -17,19 +17,28 @@ export default class App extends React.PureComponent {
   }
 
   render() {
-    console.log("APP render",<A a={this.state.a} />);
+    console.log("APP render", <A a={this.state.a} />);
     return (
       <div
-        onClick={() => {
-          this.setState({ a: this.state.a + 1 });
-        }}
+      // onClick={() => {
+      //   this.setState({ a: this.state.a + 1 });
+      // }}
       >
-        {this.state.a}
-        <A a={this.state.a} />
-        <B a={this.state.a} />
+        <span>{this.state.a}</span>
+        <A num={this.state.a} />
+        <C count={this.state.a} />
       </div>
     );
   }
+}
+
+function C(params) {
+  return (
+    <div>
+      <span>c-span</span>
+      <i>c-i</i>
+    </div>
+  );
 }
 
 class B extends React.PureComponent {
@@ -40,7 +49,7 @@ class B extends React.PureComponent {
       const start = +new Date();
       let now = start;
 
-      while (now - start < 5 * 1000) {
+      while (now - start < 1 * 1000) {
         now = +new Date();
       }
     });
@@ -54,6 +63,10 @@ class B extends React.PureComponent {
 }
 
 class A extends React.PureComponent {
+  constructor() {
+    super();
+    console.log(`constructor`);
+  }
   componentDidUpdate() {
     console.log(`B componentDidUpdate`);
   }
